@@ -18,62 +18,42 @@ interface DataType {
   tools: string[];
 }
 
-const ListItem = ({
-  data,
-  setFilterArr,
-  filterArr,
-}: {
-  data: DataType;
-  setFilterArr: (arr: string[]) => void;
-  filterArr: string[];
-}) => {
+const ListItem = ({ data }: { data: DataType }) => {
   return (
     <div
       className={`flex  relative justify-between px-5 py-2  bg-white mb-9 rounded-md shadow-xl flex-col md:flex-row md:items-center`}
     >
-      <div className=" md:hidden absolute top-0 left-4 -translate-y-1/2">
-        <Image
-          src={data.logo}
-          alt="logo"
-          width="36px"
-          height="36px"
-          // className=""
-        />
+      <div className="absolute top-0 -translate-y-1/2  md:hidden left-4">
+        <Image src={data.logo} alt="logo" width="36px" height="36px" />
       </div>
 
       {/* left side */}
-      <div className="flex items-center gap-5  border-b py-3 md:border-none md:gap-2">
+      <div className="flex items-center gap-5 py-3 border-b md:border-none md:gap-2">
         {/* Image */}
         <div className="hidden md:block">
-          <Image
-            src={data.logo}
-            alt="logo"
-            width="68px"
-            height="68px"
-            // className=""
-          />
+          <Image src={data.logo} alt="logo" width="68px" height="68px" />
         </div>
 
         <div className="">
-          <div className="flex gap-3 items-center mb-1 ">
-            <span className="text-primary text-sm md:text-lg font-bold ">
+          <div className="flex items-center gap-3 mb-1 ">
+            <span className="text-sm font-bold text-primary md:text-lg ">
               {data.company}
             </span>
             {data.new && (
-              <span className="inline-block text-white uppercase py-1 px-2 rounded-full md:text-xs bg-primary text-tiny">
+              <span className="inline-block px-2 py-1 text-white uppercase rounded-full md:text-xs bg-primary text-tiny">
                 New
               </span>
             )}
             {data.featured && (
-              <span className="inline-block text-white uppercase py-1 px-2 rounded-full md:text-xs bg-cyan-gray-dark text-tiny">
+              <span className="inline-block px-2 py-1 text-white uppercase rounded-full md:text-xs bg-cyan-gray-dark text-tiny">
                 Featured
               </span>
             )}
           </div>
-          <p className="font-bold text-cyan-gray-dark hover:text-primary transition cursor-pointer md:text-xl md:tracking-wide">
+          <p className="font-bold transition cursor-pointer text-cyan-gray-dark hover:text-primary md:text-xl md:tracking-wide">
             {data.position}
           </p>
-          <ul className="flex items-center gap-6 text-xs md:text-sm text-cyan-gray mt-2 ">
+          <ul className="flex items-center gap-6 mt-2 text-xs md:text-sm text-cyan-gray ">
             <li>{data.postedAt}</li>
             <li className="list-disc">{data.contract}</li>
             <li className="list-disc">{data.location}</li>
@@ -85,12 +65,7 @@ const ListItem = ({
       <div className="flex flex-wrap gap-2 py-3">
         {[...data.languages, data.role, data.level, ...data.tools].map(
           (language) => (
-            <Tablet
-              key={language}
-              label={language}
-              setFilterArr={setFilterArr}
-              filterArr={filterArr}
-            />
+            <Tablet key={language} label={language} />
           )
         )}
       </div>

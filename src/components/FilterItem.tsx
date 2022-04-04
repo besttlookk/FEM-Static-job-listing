@@ -1,21 +1,15 @@
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
+import { removeTagAction, TagsContext } from "../contexts/tagsContext";
 
-const FilterItem = ({
-  item,
-  setFilterArr,
-  filterArr,
-}: {
-  item: string;
-  setFilterArr: (arr: string[]) => void;
-  filterArr: string[];
-}) => {
+const FilterItem = ({ item }: { item: string }) => {
+  const { dispatch } = useContext(TagsContext);
   return (
-    <div className="flex items-center bg-cyan-gray-light-filter rounded-md overflow-hidden">
-      <span className="text-primary text-xs md:text-sm px-2">{item}</span>
+    <div className="flex items-center overflow-hidden rounded-md bg-cyan-gray-light-filter">
+      <span className="px-2 text-xs text-primary md:text-sm">{item}</span>
       <button
-        className="bg-primary p-2 w-7 h-7 md:h-8 mdLw-8 flex items-center justify-center cursor-pointer hover:bg-cyan-gray-dark transition"
-        onClick={() => setFilterArr(filterArr.filter((tag) => tag !== item))}
+        className="flex items-center justify-center p-2 transition cursor-pointer bg-primary w-7 h-7 md:h-8 mdLw-8 hover:bg-cyan-gray-dark"
+        onClick={() => dispatch(removeTagAction(item))}
       >
         <Image
           src="/images/icon-remove.svg"
